@@ -130,3 +130,8 @@ header{
     background-color: #e76d2c;
     color: white;
 }
+ button.loading{
+    opacity: 0.7;
+    background-color: #e76d2c;
+
+}
