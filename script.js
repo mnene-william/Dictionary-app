@@ -44,7 +44,7 @@ const message = document.querySelector("#displayMessage")
 const searchBtn = document.querySelector("#search-btn");
 const sound = document.querySelector("#pronunciaton");
 const apiUrlDictionary = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-let pronunciationAudio = new Audio(`https:${entry?.phonetics?.[0].audio/ "" }`);
+
 
 searchBtn.addEventListener("click", () => {
     const word = document.getElementById("searchinput").value;
@@ -90,4 +90,3 @@ searchBtn.addEventListener("click", () => {
         });
 })
 
-sound.
