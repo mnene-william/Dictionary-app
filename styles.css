@@ -209,9 +209,8 @@ section{
     cursor: pointer;
     margin-top: 4px;
 }
-.container .results {
-    display: none;
-}
+
+
 
 .container ul li{
     display: flex;
@@ -237,4 +236,29 @@ ul .word span{
 .synonyms .details .list{
     display: flex;
     flex-wrap: wrap;
+}
+
+
+
+.login-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150vh;
+}
+.login-container{
+    position: relative;
+    width: 850px;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+
+}
+form{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #e76d2c;
+    right: 0;
+    text-align: center;
 }

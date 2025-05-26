@@ -44,6 +44,7 @@ const message = document.querySelector("#displayMessage")
 const searchBtn = document.querySelector("#search-btn");
 const sound = document.querySelector("#pronunciaton");
 const apiUrlDictionary = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+let pronunciationAudio = new Audio(`https:${entry?.phonetics?.[0].audio/ "" }`);
 
 searchBtn.addEventListener("click", () => {
     const word = document.getElementById("searchinput").value;
@@ -51,7 +52,7 @@ searchBtn.addEventListener("click", () => {
         .then(response => response.json())
         .then(data => {
             console.log(data[0]);
-            // Extract data safely
+            
             const entry = data[0];
             const phonetic = entry?.phonetic || "";
             const partOfSpeech = entry?.meanings?.[0]?.partOfSpeech || "";
@@ -88,3 +89,5 @@ searchBtn.addEventListener("click", () => {
             result.innerHTML = "<p>Error fetching dictionary data.</p>";
         });
 })
+
+sound.
