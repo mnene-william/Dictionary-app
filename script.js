@@ -35,3 +35,56 @@ copyBtn.addEventListener("click", () =>{
     navigator.clipboard.writeText(quoteText.innerHTML);
 }
 )
+//End of Quote API
+
+//Start of Dictionary API/
+
+const result = document.querySelector(".results");
+const message = document.querySelector("#displayMessage")
+const searchBtn = document.querySelector("#search-btn");
+const sound = document.querySelector("#pronunciaton");
+const apiUrlDictionary = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
+searchBtn.addEventListener("click", () => {
+    const word = document.getElementById("searchinput").value;
+    fetch(`${apiUrlDictionary}${word}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data[0]);
+            // Extract data safely
+            const entry = data[0];
+            const phonetic = entry?.phonetic || "";
+            const partOfSpeech = entry?.meanings?.[0]?.partOfSpeech || "";
+            const definition = entry?.meanings?.[0]?.definitions?.[0]?.definition || "No definition found.";
+            const synonyms = entry?.meanings?.[0]?.synonyms || [];
+            result.innerHTML = `<ul class="results">
+                <li class="word">
+                    <div class="details">
+                        <p>${word}</p>
+                        <span>${partOfSpeech}  ${phonetic}</span>
+                        <i class="fa fa-volume-up" id="pronunciation" aria-hidden="true"></i>
+                    </div>
+                </li>
+                <div class="description">
+                    <li class="meaning">
+                        <div class="details">
+                             <p>Meaning</p>
+                             <span>${definition}</span>
+                        </div>
+                    </li>
+                </div>
+                <li class="synonyms">
+                    <div class="details">
+                        <p>Synonyms</p>
+                        <div class="list">
+                            ${synonyms.length > 0 ? synonyms.map(s => `<span>${s}, </span>`).join('') : "<span>No synonyms found.</span>"}
+                        </div>
+                    </div>
+                </li>
+            </ul>`;
+        })
+        .catch(error => {
+            console.error("Error fetching dictionary data:", error);
+            result.innerHTML = "<p>Error fetching dictionary data.</p>";
+        });
+})
