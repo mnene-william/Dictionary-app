@@ -58,12 +58,14 @@ searchBtn.addEventListener("click", () => {
             const partOfSpeech = entry?.meanings?.[0]?.partOfSpeech || "";
             const definition = entry?.meanings?.[0]?.definitions?.[0]?.definition || "No definition found.";
             const synonyms = entry?.meanings?.[0]?.synonyms || [];
+            const audioUrl = entry?.phonetics?.find(p => p.audio)?.audio || "";
+
             result.innerHTML = `<ul class="results">
                 <li class="word">
                     <div class="details">
                         <p>${word}</p>
                         <span>${partOfSpeech}  ${phonetic}</span>
-                        <i class="fa fa-volume-up" id="pronunciation" aria-hidden="true"></i>
+                        <i class="fa fa-volume-up" id="pronunciation" aria-hidden="true" style="cursor:pointer"></i>
                     </div>
                 </li>
                 <div class="description">
@@ -83,10 +85,22 @@ searchBtn.addEventListener("click", () => {
                     </div>
                 </li>
             </ul>`;
+
+            const pronunciationBtn = document.getElementById("pronunciation");
+            if (pronunciationBtn && audioUrl) {
+                pronunciationBtn.addEventListener("click", () => {
+                    const audio = new Audio(audioUrl);
+                    audio.play();
+                });
+            } else if (pronunciationBtn) {
+                pronunciationBtn.addEventListener("click", () => {
+                    let utter = new SpeechSynthesisUtterance(word);
+                    speechSynthesis.speak(utter);
+                });
+            }
         })
         .catch(error => {
             console.error("Error fetching dictionary data:", error);
             result.innerHTML = "<p>Error fetching dictionary data.</p>";
         });
 })
-
