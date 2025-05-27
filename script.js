@@ -166,5 +166,5 @@ searchBtn.addEventListener("click", () => {
     }, 100);
 });
 
-// Show saved words on page load
+
 displaySavedWords();
