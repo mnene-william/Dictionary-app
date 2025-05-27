@@ -43,6 +43,7 @@ const result = document.querySelector(".results");
 const message = document.querySelector("#displayMessage")
 const searchBtn = document.querySelector("#search-btn");
 const sound = document.querySelector("#pronunciaton");
+const results = document.querySelector(".results");
 const apiUrlDictionary = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 
@@ -59,8 +60,9 @@ searchBtn.addEventListener("click", () => {
             const definition = entry?.meanings?.[0]?.definitions?.[0]?.definition || "No definition found.";
             const synonyms = entry?.meanings?.[0]?.synonyms || [];
             const audioUrl = entry?.phonetics?.find(p => p.audio)?.audio || "";
+            results.style.display = "block";
 
-            result.innerHTML = `<ul class="results">
+            result.innerHTML = `<ul class="results" style="display: block;">
                 <li class="word">
                     <div class="details">
                         <p>${word}</p>
@@ -68,14 +70,12 @@ searchBtn.addEventListener("click", () => {
                         <i class="fa fa-volume-up" id="pronunciation" aria-hidden="true" style="cursor:pointer"></i>
                     </div>
                 </li>
-                <div class="description">
-                    <li class="meaning">
-                        <div class="details">
-                             <p>Meaning</p>
-                             <span>${definition}</span>
-                        </div>
-                    </li>
-                </div>
+                <li class="meaning">
+                    <div class="details">
+                        <p>Meaning</p>
+                        <span>${definition}</span>
+                    </div>
+                </li>
                 <li class="synonyms">
                     <div class="details">
                         <p>Synonyms</p>
@@ -83,6 +83,9 @@ searchBtn.addEventListener("click", () => {
                             ${synonyms.length > 0 ? synonyms.map(s => `<span>${s}, </span>`).join('') : "<span>No synonyms found.</span>"}
                         </div>
                     </div>
+                </li>
+                <li>
+                    <button class="btn" id="clear-btn">Clear</button>
                 </li>
             </ul>`;
 
@@ -105,5 +108,12 @@ searchBtn.addEventListener("click", () => {
         });
 })
 
-
+// Use event delegation for dynamically created "Clear" button
+results.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "clear-btn") {
+        result.innerHTML = "";
+        results.style.display = "none";
+        message.innerHTML = "";
+    }
+});
 
