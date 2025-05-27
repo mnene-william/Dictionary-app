@@ -44,6 +44,7 @@ const message = document.querySelector("#displayMessage")
 const searchBtn = document.querySelector("#search-btn");
 const sound = document.querySelector("#pronunciaton");
 const results = document.querySelector(".results");
+const searchInput = document.querySelector("#searchinput");
 const apiUrlDictionary = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 
@@ -108,12 +109,62 @@ searchBtn.addEventListener("click", () => {
         });
 })
 
-// Use event delegation for dynamically created "Clear" button
+
 results.addEventListener("click", (event) => {
     if (event.target && event.target.id === "clear-btn") {
         result.innerHTML = "";
         results.style.display = "none";
         message.innerHTML = "";
+        searchInput.value = "";
     }
 });
 
+const savedWordsKey = "savedWords";
+
+// Function to save a word to localStorage
+function saveWord(word) {
+    let savedWords = JSON.parse(localStorage.getItem(savedWordsKey)) || [];
+    if (!savedWords.includes(word)) {
+        savedWords.push(word);
+        localStorage.setItem(savedWordsKey, JSON.stringify(savedWords));
+    }
+}
+
+
+function displaySavedWords() {
+    const savedWords = JSON.parse(localStorage.getItem(savedWordsKey)) || [];
+    let savedList = document.getElementById("saved-words-list");
+    if (!savedList) {
+        savedList = document.createElement("ul");
+        savedList.id = "saved-words-list";
+        savedList.style.marginTop = "20px";
+        document.body.appendChild(savedList);
+    }
+    savedList.innerHTML = "<strong>Saved Words:</strong> " + (savedWords.length ? savedWords.map(w => `<li>${w}</li>`).join('') : "<li>No saved words.</li>");
+}
+
+
+results.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "save-word-btn") {
+        const word = document.getElementById("searchinput").value;
+        saveWord(word);
+        displaySavedWords();
+    }
+});
+
+
+searchBtn.addEventListener("click", () => {
+    setTimeout(() => {
+        const clearBtn = document.getElementById("clear-btn");
+        if (clearBtn && !document.getElementById("save-word-btn")) {
+            const saveBtn = document.createElement("button");
+            saveBtn.className = "btn";
+            saveBtn.id = "save-word-btn";
+            saveBtn.textContent = "Save Word";
+            clearBtn.parentNode.insertBefore(saveBtn, clearBtn);
+        }
+    }, 100);
+});
+
+// Show saved words on page load
+displaySavedWords();
