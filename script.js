@@ -104,3 +104,6 @@ searchBtn.addEventListener("click", () => {
             result.innerHTML = "<p>Error fetching dictionary data.</p>";
         });
 })
+
+
+
