@@ -164,5 +164,5 @@ searchBtn.addEventListener("click", () => {
         }
     }, 100);
 });
-
+displaySavedWords();
 
