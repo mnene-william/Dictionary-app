@@ -42,8 +42,7 @@ copyBtn.addEventListener("click", () =>{
 const result = document.querySelector(".results");
 const message = document.querySelector("#displayMessage")
 const searchBtn = document.querySelector("#search-btn");
-const sound = document.querySelector("#pronunciaton");
-const results = document.querySelector(".results");
+const sound = document.querySelector("#pronunciation");
 const searchInput = document.querySelector("#searchinput");
 const apiUrlDictionary = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -61,7 +60,7 @@ searchBtn.addEventListener("click", () => {
             const definition = entry?.meanings?.[0]?.definitions?.[0]?.definition || "No definition found.";
             const synonyms = entry?.meanings?.[0]?.synonyms || [];
             const audioUrl = entry?.phonetics?.find(p => p.audio)?.audio || "";
-            results.style.display = "block";
+            result.style.display = "block";
 
             result.innerHTML = `<ul class="results" style="display: block;">
                 <li class="word">
@@ -110,10 +109,10 @@ searchBtn.addEventListener("click", () => {
 })
 
 
-results.addEventListener("click", (event) => {
+result.addEventListener("click", (event) => {
     if (event.target && event.target.id === "clear-btn") {
         result.innerHTML = "";
-        results.style.display = "none";
+        result.style.display = "none";
         message.innerHTML = "";
         searchInput.value = "";
     }
@@ -121,7 +120,7 @@ results.addEventListener("click", (event) => {
 
 const savedWordsKey = "savedWords";
 
-// Function to save a word to localStorage
+
 function saveWord(word) {
     let savedWords = JSON.parse(localStorage.getItem(savedWordsKey)) || [];
     if (!savedWords.includes(word)) {
@@ -144,11 +143,11 @@ function displaySavedWords() {
 }
 
 
-results.addEventListener("click", (event) => {
+result.addEventListener("click", (event) => {
     if (event.target && event.target.id === "save-word-btn") {
         const word = document.getElementById("searchinput").value;
-        saveWord(word);
-        displaySavedWords();
+        window.location.href = "login.html";
+     
     }
 });
 
@@ -167,4 +166,3 @@ searchBtn.addEventListener("click", () => {
 });
 
 
-displaySavedWords();

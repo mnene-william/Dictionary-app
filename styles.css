@@ -79,6 +79,15 @@ header{
     background-image: linear-gradient(315deg, #e76d2c 0%, #FFA500 74%);
 
 }
+.intro-text{
+    color: white;
+    text-align: center;
+    margin-bottom: 4rem;
+    font-weight: bold;
+    
+}
+
+
 .quote-card{
     width: 700px;
     background-color: white;
@@ -402,7 +411,7 @@ form{
 .login-container.active .toggle-panel.toggle-left{
     left: -50%;
     transition-delay: 0.6s;
-}
+}make 
 .login-container.active .toggle-panel.toggle-right{
     right: 50%;
 }
@@ -417,5 +426,101 @@ form{
     border: 2px solid;
     background: transparent;
     box-shadow: none;
+}
+@media (max-width: 1024px) {
+    .quote-card, .container, .login-container {
+        width: 90%;
+        min-width: 0;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .headernav {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+    }
+    .navlist {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+    .navlist li {
+        margin: 14px 20px;
+        margin-bottom: 10px;
+    }
+    .logo {
+        font-size: 30px;
+        margin-top: 10px;
+    }
+    .quote-card, .container, .login-container {
+        width: 98%;
+        padding: 1rem;
+    }
+    .quote-card h3 {
+        font-size: 28px;
+    }
+    .container h2 {
+        font-size: 28px;
+    }
+    .masked-text {
+        font-size: 2rem;
+    }
+    .login-container {
+        width: 98%;
+        height: auto;
+        min-width: 0;
+        max-width: 100%;
+    }
+    .form-box, .toggle-panel {
+        width: 100%;
+        position: static;
+        padding: 20px;
+        height: auto;
+    }
+    .toggle-panel {
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-card, .container, .login-container {
+        width: 100%;
+        padding: 0.5rem;
+        min-width: 0;
+        max-width: 100%;
+    }
+    .quote-card h3, .container h2 {
+        font-size: 20px;
+    }
+    .masked-text {
+        font-size: 1.2rem;
+    }
+    .text p {
+        font-size: 16px;
+    }
+    .icons ul li {
+        font-size: 16px;
+        height: 36px;
+        width: 36px;
+        padding: 6px;
+    }
+    .input-box input {
+        font-size: 14px;
+        padding: 9px;
+    }
+    .btn, .toggle-panel .btn {
+        font-size: 14px;
+        height: 36px;
+    }
+    .form-box, .toggle-panel {
+        padding: 10px;
+    }
+    .toggle-panel p {
+        font-size: 14px;
+    }
+    .search-container {
+        padding: 6px 8px;
+    }
 }
 
