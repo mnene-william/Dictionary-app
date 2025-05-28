@@ -33,6 +33,7 @@ soundBtn.addEventListener("click", ()=> {
 
 copyBtn.addEventListener("click", () =>{
     navigator.clipboard.writeText(quoteText.innerHTML);
+    alert("Quote copied to clipboard!");
 }
 )
 //End of Quote API
@@ -106,6 +107,16 @@ searchBtn.addEventListener("click", () => {
             console.error("Error fetching dictionary data:", error);
             result.innerHTML = "<p>Error fetching dictionary data.</p>";
         });
+        setTimeout(() => {
+        const clearBtn = document.getElementById("clear-btn");
+        if (clearBtn && !document.getElementById("save-word-btn")) {
+            const saveBtn = document.createElement("button");
+            saveBtn.className = "btn";
+            saveBtn.id = "save-word-btn";
+            saveBtn.textContent = "Save Word";
+            clearBtn.parentNode.insertBefore(saveBtn, clearBtn);
+        }
+    }, 300);
 })
 
 
@@ -151,18 +162,4 @@ result.addEventListener("click", (event) => {
     }
 });
 
-
-searchBtn.addEventListener("click", () => {
-    setTimeout(() => {
-        const clearBtn = document.getElementById("clear-btn");
-        if (clearBtn && !document.getElementById("save-word-btn")) {
-            const saveBtn = document.createElement("button");
-            saveBtn.className = "btn";
-            saveBtn.id = "save-word-btn";
-            saveBtn.textContent = "Save Word";
-            clearBtn.parentNode.insertBefore(saveBtn, clearBtn);
-        }
-    }, 100);
-});
-displaySavedWords();
 
