@@ -32,7 +32,7 @@ soundBtn.addEventListener("click", ()=> {
 })
 
 copyBtn.addEventListener("click", () =>{
-    navigator.clipboard.writeText(quoteText.innerHTML);
+    navigator.clipboard.writeText(quoteText.innerHTML)
     alert("Quote copied to clipboard!");
 }
 )
