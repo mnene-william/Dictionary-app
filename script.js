@@ -3,6 +3,7 @@ const authorName = document.querySelector(".author")
 const newQuoteBtn = document.querySelector("#newQuote");
 const soundBtn = document.querySelector(".sound");
 const copyBtn = document.querySelector(".copy");
+const copyMessage = document.querySelector(".copyDisplayMessage");
 
 
  function getNewQuote() {
@@ -33,9 +34,12 @@ soundBtn.addEventListener("click", ()=> {
 
 copyBtn.addEventListener("click", () =>{
     navigator.clipboard.writeText(quoteText.innerHTML)
-    alert("Quote copied to clipboard!");
-}
-)
+    copyMessage.innerHTML = "Quote copied to clipboard!";
+    copyMessage.style.color = "#e76d2c";
+    setTimeout(() => {
+        copyMessage.innerHTML = "";
+
+    },2000)});
 //End of Quote API
 
 //Start of Dictionary API/
